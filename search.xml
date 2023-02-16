@@ -4,13 +4,27 @@
   
     
     <entry>
-      <title>article title</title>
-      <link href="/2023/02/17/article-title/"/>
-      <url>/2023/02/17/article-title/</url>
+      <title>p4ds</title>
+      <link href="/2023/02/17/p4ds/"/>
+      <url>/2023/02/17/p4ds/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="When？什么时候开始写的？"><a href="#When？什么时候开始写的？" class="headerlink" title="When？什么时候开始写的？"></a>When？什么时候开始写的？</h2><h2 id="What？都写一些什么主题的博客？"><a href="#What？都写一些什么主题的博客？" class="headerlink" title="What？都写一些什么主题的博客？"></a>What？都写一些什么主题的博客？</h2><h2 id="Who？写出来的博客都是给谁看的？"><a href="#Who？写出来的博客都是给谁看的？" class="headerlink" title="Who？写出来的博客都是给谁看的？"></a>Who？写出来的博客都是给谁看的？</h2>]]></content>
       
       
+      <categories>
+          
+          <category> Data science </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> Data analyse </tag>
+            
+        </tags>
       
     </entry>
     
