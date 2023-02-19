@@ -8,12 +8,12 @@
       <link href="/2023/02/17/p4ds/"/>
       <url>/2023/02/17/p4ds/</url>
       
-        <content type="html"><![CDATA[<h2 id="When？什么时候开始写的？"><a href="#When？什么时候开始写的？" class="headerlink" title="When？什么时候开始写的？"></a>When？什么时候开始写的？</h2><h2 id="What？都写一些什么主题的博客？"><a href="#What？都写一些什么主题的博客？" class="headerlink" title="What？都写一些什么主题的博客？"></a>What？都写一些什么主题的博客？</h2><h2 id="Who？写出来的博客都是给谁看的？"><a href="#Who？写出来的博客都是给谁看的？" class="headerlink" title="Who？写出来的博客都是给谁看的？"></a>Who？写出来的博客都是给谁看的？</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="一枚不公平的硬币–最大似然估计和贝叶斯方法"><a href="#一枚不公平的硬币–最大似然估计和贝叶斯方法" class="headerlink" title="一枚不公平的硬币–最大似然估计和贝叶斯方法"></a>一枚不公平的硬币–最大似然估计和贝叶斯方法</h1><h2 id="问题介绍"><a href="#问题介绍" class="headerlink" title="问题介绍"></a>问题介绍</h2><p>想象一下，我们正在进行一个预测连续抛硬币的过程。我们可以使用伯努利过程来建模。在伯努利过程中，一个随机变量有两种可能的结果: {0,1} (我们可以把0看作是 “正面” 而把1看成是 “反面”。如果我们抛出一枚硬币，我们可以将抛出结果的概率建模成为:</p><p>$$<br>𝑃（𝑥&#x3D;1）&#x3D; \mu<br>$$</p><p>同时，当𝑃(𝑥&#x3D;0):</p><p>$$<br>𝑃(𝑥&#x3D;0)&#x3D;1-𝑃(𝑥&#x3D;1)<br>$$</p><p>如果$\mu$&#x3D;0.5，这说明抛硬币是公平的。当我们抛出$𝑁$&#x3D;100次时，我们可能会得到一个包含正面和反面结果的序列。由于每次抛出的单个元素是不可预测的，但我们可以估计大约有50个正面和50个反面。如果我们看到25个正面和75个反面，我们就很难相信$\mu$&#x3D;0.5而可能猜测它更接近于$\mu$&#x3D;0.75。</p>]]></content>
       
       
       <categories>
           
-          <category> Data science </category>
+          <category> machine learning </category>
           
       </categories>
       
@@ -22,7 +22,11 @@
             
             <tag> python </tag>
             
-            <tag> Data analyse </tag>
+            <tag> machine learning </tag>
+            
+            <tag> Maximum Likelihood </tag>
+            
+            <tag> Bayesian Approach </tag>
             
         </tags>
       

@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="p4ds, Lzq的博客">
-    <meta name="description" content="When？什么时候开始写的？What？都写一些什么主题的博客？Who？写出来的博客都是给谁看的？">
+    <meta name="description" content="一枚不公平的硬币–最大似然估计和贝叶斯方法问题介绍想象一下，我们正在进行一个预测连续抛硬币的过程。我们可以使用伯努利过程来建模。在伯努利过程中，一个随机变量有两种可能的结果: {0,1} (我们可以把0看作是 “正面” 而把1看成是 “反面">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -367,8 +367,16 @@
                                 <span class="chip bg-color">python</span>
                             </a>
                         
-                            <a href="/tags/Data-analyse/">
-                                <span class="chip bg-color">Data analyse</span>
+                            <a href="/tags/machine-learning/">
+                                <span class="chip bg-color">machine learning</span>
+                            </a>
+                        
+                            <a href="/tags/Maximum-Likelihood/">
+                                <span class="chip bg-color">Maximum Likelihood</span>
+                            </a>
+                        
+                            <a href="/tags/Bayesian-Approach/">
+                                <span class="chip bg-color">Bayesian Approach</span>
                             </a>
                         
                     </div>
@@ -379,8 +387,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Data-science/" class="post-category">
-                                Data science
+                            <a href="/categories/machine-learning/" class="post-category">
+                                machine learning
                             </a>
                         
                     </div>
@@ -401,7 +409,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    34
+                    263
                 </div>
                 
 
@@ -421,7 +429,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="When？什么时候开始写的？"><a href="#When？什么时候开始写的？" class="headerlink" title="When？什么时候开始写的？"></a>When？什么时候开始写的？</h2><h2 id="What？都写一些什么主题的博客？"><a href="#What？都写一些什么主题的博客？" class="headerlink" title="What？都写一些什么主题的博客？"></a>What？都写一些什么主题的博客？</h2><h2 id="Who？写出来的博客都是给谁看的？"><a href="#Who？写出来的博客都是给谁看的？" class="headerlink" title="Who？写出来的博客都是给谁看的？"></a>Who？写出来的博客都是给谁看的？</h2>
+                <h1 id="一枚不公平的硬币–最大似然估计和贝叶斯方法"><a href="#一枚不公平的硬币–最大似然估计和贝叶斯方法" class="headerlink" title="一枚不公平的硬币–最大似然估计和贝叶斯方法"></a>一枚不公平的硬币–最大似然估计和贝叶斯方法</h1><h2 id="问题介绍"><a href="#问题介绍" class="headerlink" title="问题介绍"></a>问题介绍</h2><p>想象一下，我们正在进行一个预测连续抛硬币的过程。我们可以使用伯努利过程来建模。在伯努利过程中，一个随机变量有两种可能的结果: {0,1} (我们可以把0看作是 “正面” 而把1看成是 “反面”。如果我们抛出一枚硬币，我们可以将抛出结果的概率建模成为:</p>
+<p>$$<br>𝑃（𝑥&#x3D;1）&#x3D; \mu<br>$$</p>
+<p>同时，当𝑃(𝑥&#x3D;0):</p>
+<p>$$<br>𝑃(𝑥&#x3D;0)&#x3D;1-𝑃(𝑥&#x3D;1)<br>$$</p>
+<p>如果$\mu$&#x3D;0.5，这说明抛硬币是公平的。当我们抛出$𝑁$&#x3D;100次时，我们可能会得到一个包含正面和反面结果的序列。由于每次抛出的单个元素是不可预测的，但我们可以估计大约有50个正面和50个反面。如果我们看到25个正面和75个反面，我们就很难相信$\mu$&#x3D;0.5而可能猜测它更接近于$\mu$&#x3D;0.75。</p>
+
                 
             </div>
             <hr/>
@@ -489,8 +502,16 @@
                                     <span class="chip bg-color">python</span>
                                 </a>
                             
-                                <a href="/tags/Data-analyse/">
-                                    <span class="chip bg-color">Data analyse</span>
+                                <a href="/tags/machine-learning/">
+                                    <span class="chip bg-color">machine learning</span>
+                                </a>
+                            
+                                <a href="/tags/Maximum-Likelihood/">
+                                    <span class="chip bg-color">Maximum Likelihood</span>
+                                </a>
+                            
+                                <a href="/tags/Bayesian-Approach/">
+                                    <span class="chip bg-color">Bayesian Approach</span>
                                 </a>
                             
                         </div>
@@ -597,8 +618,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Data-science/" class="post-category">
-                                    Data science
+                            <a href="/categories/machine-learning/" class="post-category">
+                                    machine learning
                                 </a>
                             
                             
@@ -613,8 +634,16 @@
                         <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/Data-analyse/">
-                        <span class="chip bg-color">Data analyse</span>
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/Maximum-Likelihood/">
+                        <span class="chip bg-color">Maximum Likelihood</span>
+                    </a>
+                    
+                    <a href="/tags/Bayesian-Approach/">
+                        <span class="chip bg-color">Bayesian Approach</span>
                     </a>
                     
                 </div>
@@ -856,7 +885,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">107</span>
+                        class="white-color">336</span>
             
             
             
