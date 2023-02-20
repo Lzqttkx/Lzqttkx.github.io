@@ -405,7 +405,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    2.1k
                 </div>
                 
 
@@ -442,6 +442,61 @@
 <p>我们的目标是根据我们所观察到的一连串抛掷硬币的情况来重新评估这些概率。通过贝叶斯法则，我们可以得到:<br>$$<br>P(\mu \mid D ) &#x3D; \frac{P(D \mid \mu)}{P(D)} P_{prior}(\mu)<br>$$<br>这里$P(D \mid \mu)$是上面所假设的数据的可能性:<br>$$<br>P(D \mid \mu) &#x3D; \mu^{N_1}(1 - \mu)^{N - N_1},<br>$$<br>鉴于$\mu$它已经给出了一个特定序列的概率，它可以被归纳为唯一的两个相关数字:抛掷结果为0的数量$N_0$,和结果为1的数量$N_1$。其总数为$N&#x3D; N_0 + N_1$。<br>通过对一系列的连续投掷结果观察，我们可以有统计的数字结果来计算后验概率$P(\mu \mid D)$。</p>
 <h4 id="归一化的复杂性"><a href="#归一化的复杂性" class="headerlink" title="归一化的复杂性"></a>归一化的复杂性</h4><p>通过归一化系数计算一个单一的$\mu$的后验概率是比较简单的:<br>$$<br>P_{posterior}(\mu &#x3D; 0.5) \sim P( D \mid \mu)P_{prior}(\mu &#x3D; 0.5)<br>$$<br>考虑到可能性的简单形式和我们知道先验概率的情况，这是一个轻量级的计算。但是为了正确地归一化，我们需要直接计算$\sum_\mu P(D \mid \mu)P(\mu)$或者估计所有可能结果的后验概率，并使用它来归一化后验分布。</p>
 <p>在后文中会具体演示这两种方法。无论是哪种方式，要计算一个结果的后验概率，我们都必须计算所有的结果。即使在这样一个小表格上，仅仅计算一个整体的归一化系数就需要很大量的工作。特别是对于大量的结果和多变量似然分布，这个问题可能变得很严重。但是通过使用参数化分布，如高斯分布，有时候可以避免这个问题。后文将更详细地讨论这个问题。</p>
+<h3 id="例一："><a href="#例一：" class="headerlink" title="例一："></a>例一：</h3><p>已有大量的$\mu &#x3D; 0.75$的观测值。计算最大似然估计和后验分布。</p>
+<h4 id="数据样本"><a href="#数据样本" class="headerlink" title="数据样本"></a>数据样本</h4><p>我们使用二项分布$N &#x3D;1$， $p &#x3D; 0.75$来生成 $\mbox{Ber}( x \mid \mu &#x3D; 0.75)$的100个观察值的样本。</p>
+<h4 id="最大似然估计-1"><a href="#最大似然估计-1" class="headerlink" title="最大似然估计"></a>最大似然估计</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'figure.figsize'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'figure.dpi'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">200</span>
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token keyword">from</span> numpy<span class="token punctuation">.</span>random <span class="token keyword">import</span> default_rng
+rng <span class="token operator">=</span> default_rng<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+N_bin  <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment"># binomial for N=1 is Bernouilli</span>
+p    <span class="token operator">=</span> <span class="token number">0.75</span>
+size <span class="token operator">=</span> <span class="token number">100</span>
+sample <span class="token operator">=</span> rng<span class="token punctuation">.</span>binomial<span class="token punctuation">(</span>N_bin<span class="token punctuation">,</span> p<span class="token punctuation">,</span> size<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>sample<span class="token punctuation">)</span>
+
+n_ones <span class="token operator">=</span> sample<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># the sum is adequate for a total count</span>
+
+mu_ml <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>n_ones<span class="token punctuation">)</span><span class="token operator">/</span>size
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'mu_ml = '</span><span class="token punctuation">,</span> mu_ml<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结果为：<br>[1 0 1 1 1 0 1 1 0 1 1 1 0 1 1 1 1 1 0 1 1 1 1 1 1 0 0 1 1 1 1 1 1 0 1 1 1<br> 1 1 1 1 0 1 1 0 0 1 1 0 1 1 1 0 1 0 1 0 0 1 0 0 1 1 0 1 1 1 1 1 1 1 1 1 0<br> 1 1 0 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 1 0 1 1 0 0 0 1]<br>mu_ml &#x3D;  0.71</p>
+<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><ul>
+<li>这是对原来$\mu$的合理估计。重要的是建模者只看到数据，而不能看到如何生成数据。为了执行预测，建模者将使用类似的代码(他们并不知道示例是如何创建的)，他们使用$p &#x3D; \mu_{ml}$</li>
+<li>这是$\mu$的估计值。重复单元格将在结果中提供更多的信息。</li>
+<li>用真实数据做的实验往往不能随意重复。在这种情况下，最大似然估计仍然是一个点估计。</li>
+</ul>
+<h4 id="后验分布"><a href="#后验分布" class="headerlink" title="后验分布"></a>后验分布</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+mu_values <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.</span><span class="token punctuation">,</span> <span class="token number">0.25</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">,</span> <span class="token number">1.</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+prior   <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.05</span><span class="token punctuation">,</span> <span class="token number">0.05</span><span class="token punctuation">,</span>   <span class="token number">0.7</span><span class="token punctuation">,</span> <span class="token number">0.15</span><span class="token punctuation">,</span>  <span class="token number">0.05</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'If the prior is a proper probability distribution function, it should be normalised:'</span><span class="token punctuation">,</span> prior<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># we use the same sample as generated above that was used for the ML estimate</span>
+
+ones  <span class="token operator">=</span> n_ones
+zeros <span class="token operator">=</span> size <span class="token operator">-</span> ones
+
+<span class="token keyword">def</span> <span class="token function">likelihood</span><span class="token punctuation">(</span>mu<span class="token punctuation">,</span> ones<span class="token punctuation">,</span> zeros<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># multiply performs element wise multiplication</span>
+    <span class="token keyword">return</span> np<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span>np<span class="token punctuation">.</span>power<span class="token punctuation">(</span>mu<span class="token punctuation">,</span>ones<span class="token punctuation">)</span><span class="token punctuation">,</span>np<span class="token punctuation">.</span>power<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>mu<span class="token punctuation">,</span>zeros<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+llh <span class="token operator">=</span> likelihood<span class="token punctuation">(</span>mu_values<span class="token punctuation">,</span>ones<span class="token punctuation">,</span>zeros<span class="token punctuation">)</span>
+posterior <span class="token operator">=</span> np<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span>llh<span class="token punctuation">,</span>prior<span class="token punctuation">)</span>
+normalised_posterior <span class="token operator">=</span> posterior<span class="token operator">/</span>posterior<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>mu_values<span class="token punctuation">,</span> prior<span class="token punctuation">,</span><span class="token string">'b*'</span><span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">'prior'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>mu_values<span class="token punctuation">,</span>normalised_posterior<span class="token punctuation">,</span><span class="token string">'r+'</span><span class="token punctuation">,</span>label<span class="token operator">=</span><span class="token string">'posterior'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'$\mu$'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span><span class="token string">'falsecoin.pdf'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果先验分布是一个合适的概率分布函数，它应该归一化为:1.0</p>
+<p><img src="/source/_posts/unfaircoin1.jpg"></p>
 
                 
             </div>
@@ -885,7 +940,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">1.6k</span>
+                        class="white-color">2.2k</span>
             
             
             
